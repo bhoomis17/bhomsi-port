@@ -7,7 +7,7 @@
 <meta name="description" content="Bhoomi Vinod Salian — Computer Science & Bioinformatics student, frontend developer and researcher.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Archivo+Black&display=swap" rel="stylesheet">
 <style>
   /* ===== DESIGN TOKENS ===== */
   :root {
@@ -42,6 +42,7 @@
     --nav-h: 72px;
 
     --font-display: 'Playfair Display', Georgia, serif;
+    --font-poster: 'Archivo Black', 'Inter', sans-serif;
     --font-body: 'Inter', -apple-system, sans-serif;
     --font-script: 'Caveat', cursive;
     --font-mono: 'JetBrains Mono', monospace;
@@ -191,160 +192,157 @@
   /* ===== HERO ===== */
   .hero {
     position: relative; overflow: hidden;
-    min-height: 100vh; display: flex; align-items: center;
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
     background: var(--bg-deep);
     border-bottom: 1px solid var(--border);
+    padding-bottom: 76px;
   }
   .hero::before {
     content: ''; position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse 50% 60% at 75% 50%, rgba(255,60,120,0.06), transparent),
-      radial-gradient(ellipse 40% 50% at 20% 30%, rgba(255,60,120,0.03), transparent);
+      radial-gradient(ellipse 55% 55% at 50% 35%, rgba(255,60,120,0.07), transparent),
+      radial-gradient(ellipse 40% 50% at 85% 80%, rgba(255,60,120,0.04), transparent);
   }
   .hero .wrap {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
-    position: relative; z-index: 2; width: 100%; padding-top: 40px; padding-bottom: 40px;
+    position: relative; z-index: 2; width: 100%;
+    padding-top: 40px; padding-bottom: 24px;
+    text-align: center;
   }
 
-  /* Hero text */
-  .hero-text { position: relative; }
-  .hero-pre {
+  /* Eyebrow */
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
     font-family: var(--font-mono);
-    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--white-muted); margin-bottom: 16px;
-  }
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(56px, 7vw, 96px);
-    font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    position: relative;
-    margin-bottom: 10px;
-  }
-  .hero-title .line-1 {
-    display: block;
-    font-style: italic;
-  }
-  .hero-title .line-2 {
-    display: block;
-    font-style: normal;
-  }
-  .hero-title .outline-text {
-    -webkit-text-stroke: 2px var(--white);
-    color: transparent;
-  }
-  .hero-title .pink-text {
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--pink);
-    font-style: italic;
+    margin-bottom: 28px;
   }
-  .hero-title .script-overlay {
-    font-family: var(--font-script);
-    font-size: clamp(28px, 3.5vw, 46px);
-    color: var(--pink);
-    position: absolute;
-    left: -10px;
-    top: -14px;
-    font-weight: 600;
-    transform: rotate(-8deg);
-    opacity: 0.9;
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: ''; width: 32px; height: 1px; background: var(--pink-border);
   }
 
-  .hero-name-pill {
-    display: inline-flex; align-items: center;
-    border: 1.5px solid var(--pink-border);
-    padding: 10px 24px;
-    border-radius: var(--radius-pill);
-    font-size: 14px; font-weight: 600;
+  /* Giant name */
+  .hero-name {
+    position: relative;
+    margin: 0 0 30px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .hero-name-line {
+    position: relative;
+    display: inline-block;
+    font-family: var(--font-poster);
+    font-size: clamp(58px, 12.5vw, 168px);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
     color: var(--white);
-    margin: 28px 0 20px;
-    letter-spacing: 0.08em;
     text-transform: uppercase;
-    transition: all .3s ease;
-    background: transparent;
   }
-  .hero-name-pill:hover {
-    background: var(--pink-soft);
-    border-color: var(--pink);
-    box-shadow: var(--shadow-glow);
+  .hero-name-line::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 7px; top: 9px;
+    color: var(--pink);
+    opacity: 0.45;
+    z-index: -1;
   }
+  .hero-name-line.is-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--white);
+  }
+  .hero-name-line.is-outline::after { display: none; }
 
   .hero-quote {
     font-family: var(--font-script);
-    font-size: clamp(22px, 2.5vw, 32px);
+    font-size: clamp(20px, 2.3vw, 28px);
     color: var(--white-soft);
     line-height: 1.4;
-    margin: 20px 0 32px;
-    max-width: 420px;
+    margin: 8px auto 36px;
+    max-width: 520px;
   }
 
-  .hero-year {
-    display: inline-flex; align-items: center;
-    border: 1.5px solid var(--pink-border);
-    padding: 10px 24px;
-    border-radius: var(--radius-pill);
+  /* Badges */
+  .hero-badges {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+    margin-bottom: 8px;
+  }
+  .hero-badge {
     font-family: var(--font-mono);
-    font-size: 13px; font-weight: 500;
+    font-size: 11.5px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--white-soft);
-    letter-spacing: 0.05em;
+    border: 1.5px solid var(--border-hover);
+    border-radius: var(--radius-sm);
+    padding: 11px 20px;
+    white-space: nowrap;
+    transition: all .3s ease;
+  }
+  .hero-badge:hover {
+    border-color: var(--pink-border);
+    color: var(--white);
+  }
+  .hero-badge--accent {
+    border-color: var(--pink);
+    color: var(--pink);
+    box-shadow: 0 0 0 1px rgba(255,60,120,0.15) inset;
   }
 
-  .hero-bottom-bar {
+  /* Footer info bar */
+  .hero-footer-bar {
     position: absolute; bottom: 0; left: 0; right: 0;
     border-top: 1px solid var(--border);
     padding: 18px 0; z-index: 5;
     background: rgba(17,17,21,0.6);
     backdrop-filter: blur(12px);
   }
-  .hero-bottom-bar .wrap {
+  .hero-footer-bar .wrap {
     display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 12px;
+    text-align: left; padding-top: 0; padding-bottom: 0;
   }
-  .hero-bottom-bar a,
-  .hero-bottom-bar span {
-    font-size: 12px; color: var(--white-muted);
-    font-family: var(--font-mono);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    transition: color .3s ease;
+  .hero-fb-label {
+    display: block; font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--white-faint); margin-bottom: 4px;
   }
-  .hero-bottom-bar a:hover { color: var(--pink); }
+  .hero-fb-value {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--white-soft);
+  }
+  .hero-fb-right { text-align: right; }
+  .hero-fb-scroll {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .hero-fb-scroll-line {
+    width: 1px; height: 26px;
+    background: linear-gradient(var(--pink), transparent);
+    animation: scroll-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: .25; transform: scaleY(.6); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  }
 
-  /* Hero photo */
-  .hero-photo-area {
-    position: relative;
-    display: flex; justify-content: center; align-items: center;
-    min-height: 500px;
-  }
-  .hero-photo-img {
-    width: 100%; max-width: 380px;
-    aspect-ratio: 1 / 1;
-    height: auto;
-    object-fit: cover;
-    object-position: center 20%;
-    border-radius: 50%;
-    border: 4px solid var(--pink);
-    box-shadow: var(--shadow-glow), 0 8px 40px rgba(0,0,0,0.5);
-    position: relative; z-index: 2;
-  }
-  /* Decorative elements near photo */
+  /* Floating decorative elements */
   .hero-deco-1 {
-    position: absolute; top: 15%; right: 5%; z-index: 3;
+    position: absolute; top: 12%; right: 7%; z-index: 1;
     animation: float-gentle 4s ease-in-out infinite;
   }
   .hero-deco-2 {
-    position: absolute; bottom: 30%; left: 5%; z-index: 3;
+    position: absolute; bottom: 22%; left: 6%; z-index: 1;
     animation: float-gentle 5s ease-in-out infinite reverse;
   }
   .hero-deco-3 {
-    position: absolute; top: 30%; left: 10%; z-index: 1;
-    animation: spin-slow 20s linear infinite;
+    position: absolute; top: 50%; right: 10%; z-index: 0;
+    transform: translateY(-50%);
+    animation: spin-slow 24s linear infinite;
+    opacity: 0.5;
   }
   @keyframes float-gentle {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-10px) rotate(5deg); }
   }
-  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  @keyframes spin-slow { to { transform: translateY(-50%) rotate(360deg); } }
 
   /* ===== SECTION STYLES ===== */
   section { padding: 100px 0; position: relative; z-index: 1; }
@@ -797,13 +795,6 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1024px) {
-    .hero .wrap { grid-template-columns: 1fr; text-align: center; }
-    .hero-text { order: 2; }
-    .hero-text .hero-quote { margin-left: auto; margin-right: auto; }
-    .hero-photo-area { order: 1; min-height: 350px; justify-content: center; }
-    .hero-photo-img { max-width: 300px; }
-    .hero-name-pill { margin-left: auto; margin-right: auto; }
-    .hero-year { margin-left: auto; margin-right: auto; }
     .about-grid { grid-template-columns: 1fr; }
     .edu-grid, .proj-grid, .ach-grid { grid-template-columns: 1fr 1fr; }
     .skill-groups { grid-template-columns: 1fr; }
@@ -826,11 +817,13 @@
     .wrap { padding: 0 20px; }
     section { padding: 72px 0; }
     .contact-links { flex-direction: column; }
-    .hero { min-height: auto; }
-    .hero-photo-area { min-height: 280px; }
-    .hero-photo-img { max-width: 250px; }
-    .hero-bottom-bar .wrap { justify-content: center; text-align: center; }
-    .hero-title .script-overlay { display: none; }
+    .hero { min-height: auto; padding-top: 100px; padding-bottom: 250px; }
+    .hero-footer-bar { padding: 16px 0; }
+    .hero-footer-bar .wrap { flex-direction: column; gap: 16px; text-align: center; }
+    .hero-fb-right { text-align: center; }
+    .hero-badges { gap: 8px; }
+    .hero-badge { font-size: 10.5px; padding: 9px 14px; }
+    .hero-deco-3 { display: none; }
   }
 </style>
 </head>
@@ -862,51 +855,51 @@
 <!-- ===== HERO ===== -->
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="hero-text">
-      <p class="hero-pre reveal slide-left">CSE Student · Frontend Developer · Aspiring Full-stack Developer</p>
+    <p class="hero-eyebrow reveal fade-in">CSE Student · Frontend Developer · Full-stack Developer </p>
 
-      <h1 class="hero-title reveal slide-left" style="transition-delay:.1s">
-        <span class="script-overlay">My</span>
-        <span class="line-1">Port<span class="pink-text">folio.</span></span>
-      </h1>
+    <h1 class="hero-name reveal scale-up" style="transition-delay:.1s">
+      <span class="hero-name-line" data-text="BHOOMI">BHOOMI</span>
+      <span class="hero-name-line is-outline" data-text="SALIAN">SALIAN</span>
+    </h1>
 
-      <div class="hero-name-pill reveal slide-left" style="transition-delay:.2s">
-        BHOOMI SALIAN
-      </div>
+    <p class="hero-quote reveal fade-in" style="transition-delay:.2s">Programming isn't about what you know; it's about what you can figure out.</p>
 
-      <p class="hero-quote reveal slide-left" style="transition-delay:.3s">
-        Code is not just what you build, it's how it makes people feel.
-      </p>
-
-      
+    <div class="hero-badges reveal fade-in" style="transition-delay:.3s">
+      <span class="hero-badge">Hackathon Participant</span>
+      <span class="hero-badge">Research & Presentations</span>
+      <span class="hero-badge ">VIT Vellore · CGPA 8.8</span>
+      <span class="hero-badge">Dance Club · VIT</span>
     </div>
 
-    <div class="hero-photo-area reveal scale-up" style="transition-delay:.3s">
-      <img class="hero-photo-img" src="bhoomi.jpeg" alt="Bhoomi Salian" id="heroPhoto"
-           onerror="this.src='bhoomi.jpeg';">
-
-      <!-- Decorative hand-drawn elements -->
-      <div class="hero-deco-1">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff3c78" stroke-width="2.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </div>
-      <div class="hero-deco-2">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff3c78" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </div>
-      <div class="hero-deco-3">
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="rgba(255,60,120,0.15)" stroke-width="1">
-          <circle cx="40" cy="40" r="38" stroke-dasharray="6 6"/>
-        </svg>
-      </div>
+    <!-- Decorative hand-drawn elements -->
+    <div class="hero-deco-1">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff3c78" stroke-width="2.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </div>
+    <div class="hero-deco-2">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff3c78" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </div>
+    <div class="hero-deco-3">
+      <svg width="120" height="120" viewBox="0 0 80 80" fill="none" stroke="rgba(255,60,120,0.15)" stroke-width="1">
+        <circle cx="40" cy="40" r="38" stroke-dasharray="6 6"/>
+      </svg>
     </div>
   </div>
 
-  <!-- Bottom contact bar -->
-  <div class="hero-bottom-bar">
+  <!-- Bottom info bar -->
+  <div class="hero-footer-bar">
     <div class="wrap">
-      <a href="https://github.com/bhoomis17" target="_blank">github.com/bhoomis17</a>
-      <a href="https://linkedin.com/in/bhoomi-salian-015216370" target="_blank">@bhoomi-salian</a>
-      <a href="tel:+918879594937">+91 88795 94937</a>
-      <a href="mailto:bhoomivinodsalian17@gmail.com">bhoomivinodsalian17@gmail.com</a>
+      <div class="hero-fb-left">
+        <span class="hero-fb-label">Based in</span>
+        <span class="hero-fb-value">India</span>
+      </div>
+      <div class="hero-fb-scroll">
+        <span class="hero-fb-label" style="margin:0;">Scroll</span>
+        <span class="hero-fb-scroll-line"></span>
+      </div>
+      <div class="hero-fb-right">
+        <span class="hero-fb-label">Role</span>
+        <span class="hero-fb-value">CSE Student · Frontend Developer · Full-stack Developer </span>
+      </div>
     </div>
   </div>
 </header>
@@ -954,7 +947,7 @@
         <div class="tl-dot"></div>
         <div class="tl-card">
           <div class="tl-top">
-            <h3>Research Author & Presenter</h3>
+            <h3>Co-Research Author & Presenter</h3>
             <span class="tl-date">2026</span>
           </div>
           <p class="tl-sub">VIT Vellore — International Seminar</p>
@@ -1279,7 +1272,7 @@
   // ===== TYPING EFFECT FOR HERO QUOTE =====
   (function(){
     const quotes = [
-      "Code is not just what you build, it's how it makes people feel.",
+      "Programming isn’t about what you know; it’s about what you can figure out.",
       "Turning ideas into elegant, functional code.",
       "Where creativity meets precision.",
       "Open to internships & collaborations."
