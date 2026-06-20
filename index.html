@@ -783,181 +783,6 @@
   }
   @media (hover: hover) { .cursor-glow { display: block; } }
 
-  /* ===== GRAIN TEXTURE OVERLAY ===== */
-  body::after {
-    content: '';
-    position: fixed; inset: 0; z-index: 9999;
-    pointer-events: none;
-    opacity: 0.025;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-size: 180px 180px;
-  }
-
-  /* ===== MARQUEE TICKER ===== */
-  .marquee-strip {
-    background: var(--ink);
-    color: var(--bg);
-    padding: 13px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    position: relative;
-    z-index: 10;
-  }
-  .marquee-strip::before,
-  .marquee-strip::after {
-    content: '';
-    position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2;
-    pointer-events: none;
-  }
-  .marquee-strip::before { left: 0; background: linear-gradient(90deg, var(--ink), transparent); }
-  .marquee-strip::after { right: 0; background: linear-gradient(-90deg, var(--ink), transparent); }
-  .marquee-inner {
-    display: inline-flex; gap: 0;
-    animation: marquee-scroll 28s linear infinite;
-  }
-  .marquee-inner:hover { animation-play-state: paused; }
-  @keyframes marquee-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .marquee-item {
-    display: inline-flex; align-items: center; gap: 18px;
-    font-family: var(--font-mono); font-size: 11px;
-    letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
-    padding: 0 28px;
-  }
-  .marquee-dot {
-    width: 4px; height: 4px; border-radius: 50%;
-    background: #AC9C8D; flex-shrink: 0;
-    opacity: 0.9;
-  }
-
-  /* ===== EDITORIAL SECTION NUMBERS ===== */
-  .section-num {
-    position: absolute;
-    right: 32px; top: 56px;
-    font-family: var(--font-poster);
-    font-size: clamp(80px, 10vw, 130px);
-    font-weight: 900;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(114,56,61,0.09);
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
-    letter-spacing: -0.03em;
-    z-index: 0;
-  }
-
-  /* ===== STATS STRIP ===== */
-  .stats-strip {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    margin-top: 48px;
-  }
-  .stat-box {
-    background: var(--bg-card);
-    padding: 32px 28px;
-    display: flex; flex-direction: column; gap: 6px;
-    position: relative; overflow: hidden;
-    transition: background .3s ease;
-  }
-  .stat-box:hover { background: var(--bg-deep); }
-  .stat-box::before {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-    background: var(--grad-accent);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform .4s ease;
-  }
-  .stat-box:hover::before { transform: scaleX(1); }
-  .stat-num {
-    font-family: var(--font-display);
-    font-size: 42px; font-weight: 800; font-style: italic;
-    color: var(--accent); line-height: 1;
-  }
-  .stat-label {
-    font-family: var(--font-mono); font-size: 10px;
-    text-transform: uppercase; letter-spacing: 0.14em;
-    color: var(--ink-muted); font-weight: 500;
-  }
-
-  /* ===== FLOATING SIDE LABEL ===== */
-  .side-label {
-    position: fixed; left: 0; top: 50%;
-    transform: translateY(-50%) translateX(-50%) rotate(-90deg);
-    transform-origin: center center;
-    font-family: var(--font-mono); font-size: 9px;
-    letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--ink-faint); pointer-events: none;
-    z-index: 100; white-space: nowrap;
-    left: 20px;
-  }
-  @media (max-width: 1100px) { .side-label { display: none; } }
-
-  /* ===== SKILL METER BARS ===== */
-  .skill-meter-section { margin-top: 0; }
-  .skill-meter-label {
-    font-family: var(--font-mono); font-size: 10px; text-transform: uppercase;
-    letter-spacing: 0.15em; color: var(--ink-muted); margin-bottom: 20px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .skill-meter-label::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
-  }
-  .skill-meter-row { display: flex; flex-direction: column; gap: 14px; }
-  .skill-meter-item {
-    display: grid; grid-template-columns: 120px 1fr 36px; gap: 14px; align-items: center;
-  }
-  .skill-meter-name {
-    font-family: var(--font-mono); font-size: 11px;
-    letter-spacing: 0.04em; color: var(--ink-soft); font-weight: 500;
-  }
-  .skill-meter-bar-bg {
-    height: 4px; background: var(--border); border-radius: 10px; overflow: hidden;
-  }
-  .skill-meter-bar {
-    height: 100%; background: var(--grad-accent); border-radius: 10px;
-    transform-origin: left; transform: scaleX(0);
-    transition: transform 1.2s cubic-bezier(.22,.61,.36,1);
-  }
-  .skill-meter-bar.animate { transform: scaleX(1); }
-  .skill-meter-pct {
-    font-family: var(--font-mono); font-size: 10px;
-    color: var(--ink-muted); text-align: right;
-  }
-
-  /* ===== PULL QUOTE ===== */
-  .pull-quote {
-    border-left: 3px solid var(--accent);
-    padding: 20px 28px;
-    margin: 40px 0 0;
-    background: linear-gradient(135deg, rgba(114,56,61,0.04), transparent);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    position: relative;
-  }
-  .pull-quote::before {
-    content: '\201C';
-    position: absolute; top: -10px; left: 20px;
-    font-family: var(--font-display); font-size: 72px;
-    color: var(--accent); opacity: 0.12; line-height: 1;
-    pointer-events: none;
-  }
-  .pull-quote p {
-    font-family: var(--font-display); font-size: 17px; font-style: italic;
-    color: var(--ink); line-height: 1.65; font-weight: 500;
-  }
-  .pull-quote cite {
-    display: block; margin-top: 10px;
-    font-family: var(--font-mono); font-size: 10px;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    color: var(--accent); font-style: normal;
-  }
-
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1024px) {
     .about-grid { grid-template-columns: 1fr; }
@@ -994,9 +819,6 @@
 </head>
 <body>
 
-<!-- Side Label -->
-<div class="side-label">Bhoomi Vinod Salian &nbsp;·&nbsp; Portfolio 2026</div>
-
 <!-- Cursor Glow -->
 <div class="cursor-glow" id="cursorGlow"></div>
 
@@ -1020,33 +842,7 @@
   </div>
 </nav>
 
-<!-- ===== MARQUEE TICKER ===== -->
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-inner">
-    <!-- set 1 -->
-    <span class="marquee-item">Frontend Development<span class="marquee-dot"></span></span>
-    <span class="marquee-item">React.js<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Full-Stack Projects<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Bioinformatics<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Research &amp; Publication<span class="marquee-dot"></span></span>
-    <span class="marquee-item">VIT Vellore · CGPA 8.8<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Open to Internships<span class="marquee-dot"></span></span>
-    <span class="marquee-item">AI-Integrated Apps<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Node.js &amp; Express<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Cloud Healthcare Systems<span class="marquee-dot"></span></span>
-    <!-- set 2 (duplicate for seamless loop) -->
-    <span class="marquee-item">Frontend Development<span class="marquee-dot"></span></span>
-    <span class="marquee-item">React.js<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Full-Stack Projects<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Bioinformatics<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Research &amp; Publication<span class="marquee-dot"></span></span>
-    <span class="marquee-item">VIT Vellore · CGPA 8.8<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Open to Internships<span class="marquee-dot"></span></span>
-    <span class="marquee-item">AI-Integrated Apps<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Node.js &amp; Express<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Cloud Healthcare Systems<span class="marquee-dot"></span></span>
-  </div>
-</div> -->
+<!-- ===== HERO ===== -->
 <header class="hero" id="top">
   <div class="wrap">
     <p class="hero-eyebrow reveal fade-in">CSE Student · Frontend Developer · Full-stack Developer </p>
@@ -1106,7 +902,6 @@
 
 <!-- ===== ABOUT ===== -->
 <section id="about">
-  <span class="section-num" aria-hidden="true">01</span>
   <div class="wrap">
     <div class="section-head reveal slide-left">
       <span class="eyebrow">About me</span>
@@ -1128,61 +923,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Stats Strip -->
-    <div class="stats-strip reveal slide-up" style="transition-delay:.15s">
-      <div class="stat-box">
-        <span class="stat-num">8.8</span>
-        <span class="stat-label">CGPA at VIT</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-num">3+</span>
-        <span class="stat-label">Projects shipped</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-num">1</span>
-        <span class="stat-label">Research paper</span>
-      </div>
-    </div>
-
-    <!-- Skill Proficiency Meters -->
-    <div class="skill-meter-section reveal fade-in" style="transition-delay:.2s; margin-top:48px;">
-      <div class="skill-meter-label">Proficiency</div>
-      <div class="skill-meter-row">
-        <div class="skill-meter-item">
-          <span class="skill-meter-name">React.js</span>
-          <div class="skill-meter-bar-bg"><div class="skill-meter-bar" data-pct="0.88"></div></div>
-          <span class="skill-meter-pct">88%</span>
-        </div>
-        <div class="skill-meter-item">
-          <span class="skill-meter-name">Python</span>
-          <div class="skill-meter-bar-bg"><div class="skill-meter-bar" data-pct="0.82"></div></div>
-          <span class="skill-meter-pct">82%</span>
-        </div>
-        <div class="skill-meter-item">
-          <span class="skill-meter-name">JavaScript</span>
-          <div class="skill-meter-bar-bg"><div class="skill-meter-bar" data-pct="0.80"></div></div>
-          <span class="skill-meter-pct">80%</span>
-        </div>
-        <div class="skill-meter-item">
-          <span class="skill-meter-name">HTML / CSS</span>
-          <div class="skill-meter-bar-bg"><div class="skill-meter-bar" data-pct="0.92"></div></div>
-          <span class="skill-meter-pct">92%</span>
-        </div>
-        <div class="skill-meter-item">
-          <span class="skill-meter-name">Java</span>
-          <div class="skill-meter-bar-bg"><div class="skill-meter-bar" data-pct="0.70"></div></div>
-          <span class="skill-meter-pct">70%</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pull Quote -->
-    <div class="pull-quote reveal fade-in" style="transition-delay:.25s">
-      <p>I believe the best code is the kind that makes a real difference — to a patient's record, a researcher's workflow, or a user's daily life.</p>
-      <cite>— Bhoomi Salian</cite>
-    </div>
-
   </div>
 </section>
 
@@ -1190,7 +930,6 @@
 
 <!-- ===== EXPERIENCE ===== -->
 <section id="experience" class="section-dark">
-  <span class="section-num" aria-hidden="true">02</span>
   <div class="wrap">
     <div class="section-head reveal slide-left">
       <span class="eyebrow">Experience</span>
@@ -1248,7 +987,6 @@
 
 <!-- ===== EDUCATION ===== -->
 <section id="education">
-  <span class="section-num" aria-hidden="true">03</span>
   <div class="wrap">
     <div class="section-head reveal slide-left">
       <span class="eyebrow">Education</span>
@@ -1281,7 +1019,6 @@
 
 <!-- ===== PROJECTS ===== -->
 <section id="projects" class="section-dark">
-  <span class="section-num" aria-hidden="true">04</span>
   <div class="wrap">
     <div class="section-head reveal slide-left">
       <span class="eyebrow">Projects</span>
@@ -1340,7 +1077,6 @@
 
 <!-- ===== SKILLS ===== -->
 <section id="skills">
-  <span class="section-num" aria-hidden="true">05</span>
   <div class="wrap">
     <div class="section-head reveal slide-left">
       <span class="eyebrow">Skills</span>
@@ -1379,7 +1115,6 @@
 
 <!-- ===== ACHIEVEMENTS ===== -->
 <section id="achievements" class="section-dark">
-  <span class="section-num" aria-hidden="true">06</span>
   <div class="wrap">
     <div class="section-head reveal slide-left">
       <span class="eyebrow">Achievements</span>
@@ -1567,19 +1302,7 @@
     }
     setTimeout(type, 2000);
   })();
-  // ===== SKILL METER ANIMATION =====
-  const bars = document.querySelectorAll('.skill-meter-bar');
-  const barObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const bar = e.target;
-        const pct = parseFloat(bar.dataset.pct);
-        bar.style.transform = `scaleX(${pct})`;
-        bar.classList.add('animate');
-        barObserver.unobserve(bar);
-      }
-    });
-  }, { threshold: 0.2 });
-  bars.forEach(b => barObserver.observe(b));
 </script>
+
+</body>
 </html>
